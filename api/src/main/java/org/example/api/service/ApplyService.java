@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 public class ApplyService {
     private final CouponRepository couponRepository;
 
+    //쿠폰 발급 로직
     public void applyCoupon(Long userId) {
         long count = couponRepository.count();
 
