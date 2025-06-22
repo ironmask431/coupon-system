@@ -49,7 +49,7 @@ class ApplyServiceTest {
         latch.await(); // countDown 이 모두 완료되면 종료.
 
         long count = couponRepository.count();
-        System.out.println("count = " + count); // 실행결과 149.  100개를 초과하여 발급되었다.
+        System.out.println("여러명_동시_응모() count = " + count); // 실행결과 149.  100개를 초과하여 발급되었다.
 
         assertEquals(100, count);
     }
