@@ -28,6 +28,6 @@ public class ApplyService {
             return;
         }
 //        couponRepository.save(new Coupon(userId));
-        couponCreateProducer.send(userId); // 쿠폰 생성 요청을 kakfa 로 보내도록 적용.
+        couponCreateProducer.send(userId); // 쿠폰 생성 요청을 kafka 로 보내도록 적용.
     }
 }
