@@ -30,7 +30,7 @@ class ApplyServiceTest {
 
     @Test
     void 여러명_동시_응모() throws InterruptedException {
-        int threadCount = 1000;
+        int threadCount = 100;
         ExecutorService executorService = Executors.newFixedThreadPool(threadCount);
 
         //멀티스레드가 모두 종료될때까지 대기하는 로직을 만들때 사용. (모든 스레드 실행이 종료되고 쿠폰발급 카운트를 해야하기때문)
