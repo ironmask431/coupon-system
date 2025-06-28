@@ -48,6 +48,8 @@ class ApplyServiceTest {
         }
         latch.await(); // countDown 이 모두 완료되면 종료.
 
+        Thread.sleep(10000); // 컨슈머에서 처리가 다 끝날때까지 기다리기 위해 10초 대기.
+
         long count = couponRepository.count();
         System.out.println("여러명_동시_응모() count = " + count); // 실행결과 149.  100개를 초과하여 발급되었다.
 
