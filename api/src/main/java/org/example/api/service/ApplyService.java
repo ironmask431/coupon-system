@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.api.domain.Coupon;
 import org.example.api.kafka.producer.CouponCreateProducer;
+import org.example.api.repository.AppliedUserRepository;
 import org.example.api.repository.CouponCountRepository;
 import org.example.api.repository.CouponRepository;
 import org.springframework.stereotype.Service;
@@ -15,10 +16,18 @@ public class ApplyService {
     private final CouponRepository couponRepository;
     private final CouponCountRepository couponCountRepository;
     private final CouponCreateProducer couponCreateProducer;
+    private final AppliedUserRepository appliedUserRepository;
 
     //쿠폰 발급 로직
     public void applyCoupon(Long userId)   {
-//        long count = couponRepository.count(); // db에서 조회하는 방식
+        //long count = couponRepository.count(); // db에서 조회하는 방식
+
+        // 이미 쿠폰을 발급 받은 userId 는 pass (1인당 1쿠폰 허용)
+        Long applied = appliedUserRepository.add(userId);
+        if(applied != 1){
+            log.info("이미 발급받았음. - userId = {}, applied = {}", userId, applied);
+            return;
+        }
 
         // count를 redis "coupon_count" 에서 조회
         // 주의 * : 매번 실행 시 마다 redis의 coupon_count 초기화 해줘야함. 명렁어 : flushall

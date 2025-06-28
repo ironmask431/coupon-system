@@ -55,5 +55,4 @@ class ApplyServiceTest {
 
         assertEquals(100, count);
     }
-
 }
